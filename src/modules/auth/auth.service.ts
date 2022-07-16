@@ -44,7 +44,7 @@ export class AuthService {
       return this.encode(user);
     }
 
-    if (user.failedLoginAttempts == 0) {
+    if (!user.failedLoginAttempts) {
       await this.userModel.findByIdAndUpdate(user._id, {
         failedLoginAttempts: 1,
         failedLoginTime: new Date()
