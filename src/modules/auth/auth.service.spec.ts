@@ -44,10 +44,10 @@ describe('AuthService', () => {
     return mockService.login(email, wrongPassword);
   };
 
-  const createUser = (email: string, password: string) => {
+  const createUser = (email: string, hashPassword: string) => {
     const user = new User();
     user.email = email;
-    user.password = password;
+    user.password = hashPassword;
 
     return user;
   }
@@ -98,23 +98,23 @@ describe('AuthService', () => {
     expect(mockService).toBeDefined();
   });
 
-  it('should be success when register an user', async () => {
-    jest.spyOn(mockUserModel, 'findOne')
-      .mockResolvedValue(null);
+  // it('should be success when register an user', async () => {
+  //   jest.spyOn(mockUserModel, 'findOne')
+  //     .mockResolvedValue(null);
 
-    // jest.spyOn(mockUserModel, 'save')
-    //   .mockResolvedValue(new User());
+  //   // jest.spyOn(mockUserModel, 'save')
+  //   //   .mockResolvedValue(new User());
 
-    const result = await mockService.register({
-      email,
-      password,
-      confirmPassword: password
-    });
+  //   const result = await mockService.register({
+  //     email,
+  //     password,
+  //     confirmPassword: password
+  //   });
     
-  });
+  // });
 
   it('should login successfully', async () => {
-    const user = createUser(email, password);
+    const user = createUser(email, hashPassword);
     jest.spyOn(mockUserModel, 'findOne')
       .mockResolvedValue(user as UserDocument);
 
